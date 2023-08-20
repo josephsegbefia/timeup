@@ -1,9 +1,13 @@
-import uuid from "react-uuid";
+export function generateUniqueId() {
+  const timestamp = new Date().getTime(); // Get current timestamp
+  const random = Math.floor(Math.random() * 10000); // Generate a random number
+  return `${timestamp}-${random}`;
+}
 export function newTimer(attrs = {}) {
   const timer = {
     title: attrs.title || "Timer",
     project: attrs.project || "Project",
-    id: uuid, // eslint-disable-line no-undef
+    id: generateUniqueId(), // eslint-disable-line no-undef
     elapsed: 0
   };
 

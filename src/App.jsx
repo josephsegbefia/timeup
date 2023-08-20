@@ -1,6 +1,6 @@
 import React from "react";
-import uuid from "react-uuid";
-import { newTimer } from "./helpers";
+
+import { newTimer, generateUniqueId } from "./helpers";
 import EditableTimerList from "./components/EditableTimerList";
 import ToggleableTimerForm from "./components/ToggleableTimerForm";
 import { getTimers } from "./client";
@@ -11,14 +11,14 @@ class App extends React.Component {
       {
         title: "Practice squat",
         project: "Gym Chores",
-        id: uuid(),
+        id: generateUniqueId(),
         elapsed: 5456099,
         runningSince: Date.now()
       },
       {
         title: "Bake squash",
         project: "Kitchen Chores",
-        id: uuid(),
+        id: generateUniqueId(),
         elapsed: 1273998,
         runningSince: null
       }
