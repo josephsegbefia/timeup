@@ -1,9 +1,13 @@
 import React from "react";
-
+import { Routes, Route } from "react-router-dom";
 import { newTimer, generateUniqueId } from "./helpers";
 import EditableTimerList from "./components/EditableTimerList";
 import ToggleableTimerForm from "./components/ToggleableTimerForm";
 import { getTimers } from "./client";
+import HeaderMenu from "./components/HeaderMenu";
+import Home from "./components/Home";
+import Login from "./auth/Login";
+import Signup from "./auth/Signup";
 
 class App extends React.Component {
   state = {
@@ -111,19 +115,39 @@ class App extends React.Component {
   };
   render() {
     return (
-      <div className="ui column centered grid">
-        <div className="column">
-          <EditableTimerList
-            timers={this.state.timers}
-            onFormSubmit={this.handleEditFormSubmit}
-            onTrashClick={this.handleTrashClick}
-            onStartClick={this.handleStartClick}
-            onStopClick={this.handleStopClick}
-          />
-          <ToggleableTimerForm
-            // isOpen={true}
-            onFormSubmit={this.handleCreateFormSubmit}
-          />
+      <div>
+        <HeaderMenu />
+        <br />
+        <br />
+        <div className="ui column centered grid">
+          <div className="column"></div>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/timers"
+              element={
+                <EditableTimerList
+                  timers={this.state.timers}
+                  onFormSubmit={this.handleEditFormSubmit}
+                  onTrashClick={this.handleTrashClick}
+                  onStartClick={this.handleStartClick}
+                  onStopClick={this.handleStopClick}
+                  onCreateFormSubmit={this.handleCreateFormSubmit}
+                />
+              }
+            />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            {/* <Route
+              path="/timers"
+              element={
+                <ToggleableTimerForm
+                  // isOpen={true}
+                  onFormSubmit={this.handleCreateFormSubmit}
+                />
+              }
+            /> */}
+          </Routes>
         </div>
       </div>
     );

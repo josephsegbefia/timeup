@@ -1,5 +1,6 @@
 import React from "react";
 import EditableTimer from "./EditableTimer";
+import ToggleableTimerForm from "./ToggleableTimerForm";
 
 class EditableTimerList extends React.Component {
   render() {
@@ -17,7 +18,12 @@ class EditableTimerList extends React.Component {
         onStopClick={this.props.onStopClick}
       />
     ));
-    return <div id="timers">{timers}</div>;
+    return (
+      <div id="timers">
+        {timers}{" "}
+        <ToggleableTimerForm onFormSubmit={this.props.onCreateFormSubmit} />
+      </div>
+    );
   }
 }
 
