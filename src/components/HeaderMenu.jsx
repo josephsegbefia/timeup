@@ -1,6 +1,6 @@
 import React from "react";
 import { Input, Menu } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 class HeaderMenu extends React.Component {
   state = { activeItem: "home" };
 
@@ -11,29 +11,29 @@ class HeaderMenu extends React.Component {
 
     return (
       <Menu secondary>
-        <Link to="/">
-          <Menu.Item
-            name="home"
-            active={activeItem === "home"}
-            onClick={this.handleItemClick}
-          />
-        </Link>
+        <Menu.Item
+          as={NavLink}
+          to="/"
+          name="home"
+          active={activeItem === "home"}
+          onClick={this.handleItemClick}
+        />
 
-        <Link to="/login">
-          <Menu.Item
-            name="log in"
-            active={activeItem === "log in"}
-            onClick={this.handleItemClick}
-          />
-        </Link>
+        <Menu.Item
+          as={NavLink}
+          to="/login"
+          name="log in"
+          active={activeItem === "log in"}
+          onClick={this.handleItemClick}
+        />
 
-        <Link to="/signup">
-          <Menu.Item
-            name="sign up"
-            active={activeItem === "sign up"}
-            onClick={this.handleItemClick}
-          />
-        </Link>
+        <Menu.Item
+          as={NavLink}
+          to="/signup"
+          name="sign up"
+          active={activeItem === "sign up"}
+          onClick={this.handleItemClick}
+        />
 
         <Menu.Menu position="right">
           {/* <Menu.Item>
