@@ -1,7 +1,9 @@
 import React from "react";
 import { Button, Form, Icon, Message } from "semantic-ui-react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 const API_URL = "http://localhost:5005";
@@ -13,6 +15,8 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   // const [submitdisabled, setSubmitDisabled] = useState(true);
+
+  const navigate = useNavigate();
 
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);
@@ -57,8 +61,22 @@ const Signup = () => {
       .post(`${API_URL}/auth/signup`, requestBody)
       .then((response) => {
         console.log(response.data.user);
+        // console.log(response.data);
+
+        toast.success("Sign up successful. Redirecting to log in page", {
+          position: toast.POSITION.TOP_RIGHT
+        });
+
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
       })
-      .catch((err) => "error");
+      .catch((err) => {
+        console.log(err.response.data.message);
+        toast.error(err.response.data.message, {
+          position: toast.POSITION.TOP_RIGHT
+        });
+      });
   };
 
   return (
@@ -68,6 +86,7 @@ const Signup = () => {
         header="Welcome to our site!"
         content="Fill out the form below to sign-up for a new account"
       />
+      <ToastContainer />
       <Form
         onSubmit={onFormSubmit}
         className="attached left aligned fluid segment"
