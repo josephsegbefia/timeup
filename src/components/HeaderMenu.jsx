@@ -46,13 +46,13 @@ function HeaderMenu() {
         <>
           <Menu.Item
             as={NavLink}
-            to="/timers"
+            to={`/${user._id}/timers`}
             name="timers"
             active={activeItem === "timers"}
             onClick={handleItemClick}
           />
 
-          <Menu.Menu position="right ">
+          <Menu.Menu position="right">
             {user && (
               <Menu.Item
                 name={`${user.firstName} ${user.lastName}`}

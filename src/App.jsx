@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { Routes, Route, useParams, useNavigate } from "react-router-dom";
 import { newTimer, generateUniqueId } from "./helpers";
 import EditableTimerList from "./components/EditableTimerList";
 import ToggleableTimerForm from "./components/ToggleableTimerForm";
@@ -9,9 +9,19 @@ import Home from "./components/Home";
 import Login from "./auth/Login";
 import Signup from "./auth/Signup";
 import IsPrivate from "./components/IsPrivate";
+import { AuthContext } from "./context/auth.context";
+
+import axios from "axios";
+
+const API_URL = "http://localhost:5005";
 
 function App() {
   const [timers, setTimers] = useState([]);
+  const { user } = useContext(AuthContext);
+  let { userId } = useParams();
+  const storedToken = localStorage.getItem("authToken");
+
+  const navigate = useNavigate();
 
   const createTimer = (timer) => {
     const t = newTimer(timer);
@@ -56,6 +66,30 @@ function App() {
     );
   };
 
+  if (user) {
+    userId = user._id;
+    console.log(userId);
+  }
+  const getAllTimers = () => {
+    if (user) {
+      axios
+        .get(`${API_URL}/api/${userId}/timers`, {
+          headers: { Authorization: `Bearer ${storedToken}` }
+        })
+        .then((response) => {
+          console.log(response.data);
+          setTimers(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+          navigate("/");
+        });
+    }
+  };
+
+  useEffect(() => {
+    getAllTimers();
+  }, [user]);
   return (
     <div>
       <HeaderMenu />
@@ -66,7 +100,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
-            path="/timers"
+            path={"/:userId/timers"}
             element={
               <IsPrivate>
                 <EditableTimerList
