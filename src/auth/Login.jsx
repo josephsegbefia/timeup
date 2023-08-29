@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Form, Icon, Message } from "semantic-ui-react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { AuthContext } from "../context/auth.context";
 
 const API_URL = "http://localhost:5005";
 
@@ -11,6 +13,9 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
+  const { storeToken, authenticateUser } = useContext(AuthContext);
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -37,6 +42,9 @@ const Login = () => {
         toast.success("Login Successful", {
           position: toast.POSITION.TOP_RIGHT
         });
+        storeToken(response.data.authToken);
+        authenticateUser();
+        navigate("/timers");
       })
       .catch((err) => {
         toast.error(err.response.data.message, {
