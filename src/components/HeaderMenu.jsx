@@ -53,14 +53,16 @@ function HeaderMenu() {
           />
 
           <Menu.Menu position="right ">
-            {/* <Image
-              className="ui avatar image"
-              src="../../public/images/daniel.jpg"
-            ></Image> */}
+            {user && (
+              <Menu.Item
+                name={`${user.firstName} ${user.lastName}`}
+                style={{ color: "green" }}
+              />
+            )}
             <Menu.Item
               name="log out"
               active={activeItem === "log out"}
-              onClick={handleItemClick}
+              onClick={logOutUser}
             />
           </Menu.Menu>
         </>

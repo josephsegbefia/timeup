@@ -44,7 +44,7 @@ const Login = () => {
         });
         storeToken(response.data.authToken);
         authenticateUser();
-        navigate("/timers");
+        navigate("/");
       })
       .catch((err) => {
         toast.error(err.response.data.message, {
