@@ -94,16 +94,31 @@ function App() {
   const stopTimer = (timerId) => {
     const now = Date.now();
     setTimers((prevTimers) =>
-      prevTimers.map((timer) =>
-        timer._id === timerId
-          ? {
-              ...timer,
-              elapsed: timer.elapsed + (now - timer.runningSince),
-              runningSince: null
-            }
-          : timer
-      )
+      prevTimers.map((timer) => {
+        if (timer._id === timerId) {
+          const lastElapsed = now - timer.runningSince;
+          return Object.assign({}, timer, {
+            elapsed: timer.elapsed + lastElapsed,
+            runningSince: null
+          });
+        } else {
+          return timer;
+        }
+      })
     );
+
+    axios
+      .post(
+        `${API_URL}/api/users/${user_id}/timers/${timerId}/stop`,
+        { stop: now },
+        { headers: { Authorization: `Bearer ${storedToken}` } }
+      )
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   if (user) {
