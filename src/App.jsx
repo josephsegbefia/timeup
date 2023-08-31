@@ -55,13 +55,27 @@ function App() {
   };
 
   const updateTimer = (attrs) => {
+    let timerId = attrs.id;
     setTimers((prevTimers) =>
       prevTimers.map((timer) =>
-        timer.id === attrs.id
+        timer._id === attrs.id
           ? { ...timer, title: attrs.title, project: attrs.project }
           : timer
       )
     );
+
+    axios
+      .post(
+        `${API_URL}/api/${user_id}/timers/${timerId}/edit`,
+        { title: attrs.title, project: attrs.project },
+        { headers: { Authorization: `Bearer ${storedToken}` } }
+      )
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const deleteTimer = (timerId) => {
