@@ -10,6 +10,7 @@ import Login from "./auth/Login";
 import Signup from "./auth/Signup";
 import IsPrivate from "./components/IsPrivate";
 import { AuthContext } from "./context/auth.context";
+import { Grid, Image } from "semantic-ui-react";
 
 import axios from "axios";
 
@@ -17,14 +18,39 @@ const API_URL = "http://localhost:5005";
 
 function App() {
   const [timers, setTimers] = useState([]);
+
   const { user } = useContext(AuthContext);
   let { userId } = useParams();
   const storedToken = localStorage.getItem("authToken");
+
+  let user_id;
+  if (user) {
+    user_id = user._id;
+    console.log("What I want to see:", user_id);
+  }
 
   const navigate = useNavigate();
 
   const createTimer = (timer) => {
     const t = newTimer(timer);
+    // setTimers([...timers, t]);
+
+    const requestBody = { user, title: t.title, project: t.project };
+    // console.log("Expectation:", requestBody);
+
+    axios
+      .post(
+        `${API_URL}/api/timers`,
+        requestBody, // Request body should be passed here
+        { headers: { Authorization: `Bearer ${storedToken}` } } // Headers should be passed as the third argument
+      )
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     setTimers([...timers, t]);
   };
 
@@ -46,16 +72,30 @@ function App() {
     const now = Date.now();
     setTimers((prevTimers) =>
       prevTimers.map((timer) =>
-        timer.id === timerId ? { ...timer, runningSince: now } : timer
+        timer._id === timerId ? { ...timer, runningSince: now } : timer
       )
     );
+    axios
+      .post(
+        `${API_URL}/api/users/${user_id}/timers/${timerId}/start`,
+        {
+          start: now
+        },
+        { headers: { Authorization: `Bearer ${storedToken}` } }
+      )
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const stopTimer = (timerId) => {
     const now = Date.now();
     setTimers((prevTimers) =>
       prevTimers.map((timer) =>
-        timer.id === timerId
+        timer._id === timerId
           ? {
               ...timer,
               elapsed: timer.elapsed + (now - timer.runningSince),
@@ -90,6 +130,8 @@ function App() {
   useEffect(() => {
     getAllTimers();
   }, [user]);
+
+  console.log(timers);
   return (
     <div>
       <HeaderMenu />

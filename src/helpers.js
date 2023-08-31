@@ -7,7 +7,7 @@ export function newTimer(attrs = {}) {
   const timer = {
     title: attrs.title || "Timer",
     project: attrs.project || "Project",
-    id: generateUniqueId(), // eslint-disable-line no-undef
+    // id: generateUniqueId(), // eslint-disable-line no-undef
     elapsed: 0
   };
 
