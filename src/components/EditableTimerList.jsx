@@ -2,27 +2,32 @@ import React, { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import EditableTimer from "./EditableTimer";
 import ToggleableTimerForm from "./ToggleableTimerForm";
-// import { AuthContext } from "./context/auth.context";
+import { Grid } from "semantic-ui-react";
 
 function EditableTimerList(props) {
   const timers = props.timers.map((timer) => (
-    <EditableTimer
-      key={timer._id}
-      id={timer._id}
-      title={timer.title}
-      project={timer.project}
-      elapsed={timer.elapsed}
-      runningSince={timer.runningSince}
-      onFormSubmit={props.onFormSubmit}
-      onTrashClick={props.onTrashClick}
-      onStartClick={props.onStartClick}
-      onStopClick={props.onStopClick}
-    />
+    <Grid.Column key={timer._id} mobile={32} tablet={16} computer={8}>
+      <EditableTimer
+        id={timer._id}
+        title={timer.title}
+        project={timer.project}
+        elapsed={timer.elapsed}
+        runningSince={timer.runningSince}
+        onFormSubmit={props.onFormSubmit}
+        onTrashClick={props.onTrashClick}
+        onStartClick={props.onStartClick}
+        onStopClick={props.onStopClick}
+      />
+    </Grid.Column>
   ));
 
   return (
     <div id="timers">
-      {timers} <ToggleableTimerForm onFormSubmit={props.onCreateFormSubmit} />
+      <Grid>
+        {/* Use a 4-column grid, doubling means it will automatically wrap to the next row on smaller screens */}
+        {timers}
+      </Grid>
+      <ToggleableTimerForm onFormSubmit={props.onCreateFormSubmit} />
     </div>
   );
 }

@@ -18,6 +18,7 @@ const API_URL = "http://localhost:5005";
 
 function App() {
   const [timers, setTimers] = useState([]);
+  const [rerender, setRerender] = useState(false);
 
   const { user } = useContext(AuthContext);
   let { userId } = useParams();
@@ -39,11 +40,9 @@ function App() {
     // console.log("Expectation:", requestBody);
 
     axios
-      .post(
-        `${API_URL}/api/timers`,
-        requestBody, // Request body should be passed here
-        { headers: { Authorization: `Bearer ${storedToken}` } } // Headers should be passed as the third argument
-      )
+      .post(`${API_URL}/api/timers`, requestBody, {
+        headers: { Authorization: `Bearer ${storedToken}` }
+      })
       .then((response) => {
         console.log(response.data);
       })
@@ -52,10 +51,12 @@ function App() {
       });
 
     setTimers([...timers, t]);
+    setRerender(!rerender);
   };
 
   const updateTimer = (attrs) => {
     let timerId = attrs.id;
+    console.log("TimerId", timerId);
     setTimers((prevTimers) =>
       prevTimers.map((timer) =>
         timer._id === attrs.id
