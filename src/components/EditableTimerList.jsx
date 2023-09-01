@@ -5,9 +5,10 @@ import ToggleableTimerForm from "./ToggleableTimerForm";
 import { Grid } from "semantic-ui-react";
 
 function EditableTimerList(props) {
-  const timers = props.timers.map((timer) => (
-    <Grid.Column key={timer._id} mobile={32} tablet={16} computer={8}>
+  const timers = props.timers.map((timer, index) => (
+    <Grid.Column key={timer._id} mobile={32} tablet={32} computer={8}>
       <EditableTimer
+        key={index}
         id={timer._id}
         title={timer.title}
         project={timer.project}
