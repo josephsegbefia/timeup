@@ -25,12 +25,15 @@ class Home extends React.Component {
           </Message.List>
         </Message>
 
-        <Button animated positive>
-          <Button.Content visible>Log In</Button.Content>
-          <Button.Content hidden>
-            <Icon name="arrow right" />
-          </Button.Content>
-        </Button>
+        <Link to="/login">
+          <Button animated positive>
+            <Button.Content visible>Log In</Button.Content>
+            <Button.Content hidden>
+              <Icon name="arrow right" />
+            </Button.Content>
+          </Button>
+        </Link>
+
         <Link to="/signup">
           <Button animated positive>
             <Button.Content visible>Sign Up</Button.Content>
