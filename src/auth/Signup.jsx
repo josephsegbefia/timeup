@@ -60,7 +60,7 @@ const Signup = () => {
     axios
       .post(`${API_URL}/auth/signup`, requestBody)
       .then((response) => {
-        console.log(response.data.user);
+        // console.log(response.data.user);
         // console.log(response.data);
 
         toast.success("Sign up successful. Redirecting to log in page", {
