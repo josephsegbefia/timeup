@@ -13,6 +13,7 @@ import { AuthContext } from "./context/auth.context";
 import { Grid, Image } from "semantic-ui-react";
 
 import axios from "axios";
+import VerifyEmail from "./components/VerifyEmail";
 
 const API_URL = "http://localhost:5005";
 
@@ -187,9 +188,9 @@ function App() {
 
   useEffect(() => {
     getAllTimers();
-  }, [user, rerender]);
+  }, [rerender]);
 
-  console.log(timers);
+  // console.log(timers);
   return (
     <div>
       <HeaderMenu />
@@ -214,6 +215,7 @@ function App() {
               </IsPrivate>
             }
           />
+          <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           {/* <Route

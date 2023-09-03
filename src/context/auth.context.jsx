@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -49,6 +49,10 @@ function AuthProviderWrapper(props) {
     localStorage.removeItem("authToken");
   };
 
+  const updateUser = useCallback((response) => {
+    localStorage.setItem("user", JSON.stringify(response));
+    setUser(response);
+  });
   const logOutUser = () => {
     removeToken();
     authenticateUser();
@@ -64,6 +68,7 @@ function AuthProviderWrapper(props) {
         isLoggedIn,
         isLoading,
         user,
+        updateUser,
         storeToken,
         authenticateUser,
         logOutUser
