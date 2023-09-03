@@ -60,10 +60,12 @@ function App() {
       .then((response) => {
         console.log(response.data);
         setTimers(response.data);
+        // setRerender(!rerender);
       })
       .catch((error) => {
         console.log(error);
       });
+    setRerender(!rerender);
   };
 
   const updateTimer = (attrs) => {
@@ -188,7 +190,7 @@ function App() {
 
   useEffect(() => {
     getAllTimers();
-  }, [rerender]);
+  }, [user, rerender]);
 
   // console.log(timers);
   return (
