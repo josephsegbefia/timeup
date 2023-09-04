@@ -67,7 +67,7 @@ const PasswordResetForm = () => {
       >
         <Form.Input
           name="password"
-          label="Password"
+          label="Brand New Password"
           type="password"
           value={password}
           onChange={handlePasswordChange}
