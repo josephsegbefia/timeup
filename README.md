@@ -53,7 +53,7 @@ npm install
 cd ../server
 npm install
 
-cd timeuo-server
+cd timeup-server
 npm run dev
 
 cd client
