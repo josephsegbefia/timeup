@@ -10,6 +10,7 @@ const PasswordResetForm = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
   const passwordResetToken = searchParams.get("passwordResetToken");
   const checkFields = () => {
@@ -37,14 +38,19 @@ const PasswordResetForm = () => {
         toast.success(response.data.message, {
           position: toast.POSITION.TOP_RIGHT
         });
+        setTimeout(() => {
+          navigate("/login");
+        }, 3000);
       })
       .catch((error) => {
-        toast.error(response.error.message);
+        // toast.error(error.response.error.messag);
+        // console.log(error.response.data.message);
+        setError(true);
+        toast.error(error.response.data.message);
       });
 
-    setTimeout(() => {
-      navigate("/login");
-    }, 3000);
+    setPassword("");
+    setPasswordConfirm("");
   };
 
   return (
