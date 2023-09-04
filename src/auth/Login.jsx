@@ -69,7 +69,7 @@ const Login = () => {
           name="email"
           label="Email"
           placeholder="Email"
-          type="text"
+          type="email"
           value={email}
           onChange={handleEmailChange}
         />
@@ -93,7 +93,7 @@ const Login = () => {
       </Form>
       <Message attached="bottom" warning>
         <Icon name="help" />
-        Forgot Password?&nbsp;<a href="#">Click Here</a>&nbsp;
+        Forgot Password?&nbsp;<a href="/forgot-password">Click Here</a>&nbsp;
       </Message>
     </div>
   );
