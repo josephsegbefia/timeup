@@ -8,6 +8,7 @@ import HeaderMenu from "./components/HeaderMenu";
 import Home from "./components/Home";
 import Login from "./auth/Login";
 import Signup from "./auth/Signup";
+import VerifyEmailNotification from "./components/pages/VerifyEmailNotification";
 import IsPrivate from "./components/IsPrivate";
 import { AuthContext } from "./context/auth.context";
 import { Grid, Image } from "semantic-ui-react";
@@ -216,6 +217,10 @@ function App() {
                 />
               </IsPrivate>
             }
+          />
+          <Route
+            path="/verification-notification"
+            element={<VerifyEmailNotification />}
           />
           <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/login" element={<Login />} />

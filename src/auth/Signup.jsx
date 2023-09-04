@@ -68,7 +68,7 @@ const Signup = () => {
         });
 
         setTimeout(() => {
-          navigate("/login");
+          navigate("/verification-notification");
         }, 2000);
       })
       .catch((err) => {
