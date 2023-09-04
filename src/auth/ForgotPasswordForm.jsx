@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, Message } from "semantic-ui-react";
+import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+const API_URL = "http://localhost:5005";
 const ForgotPasswordForm = () => {
   const [email, setEmail] = useState("");
 
@@ -12,6 +14,23 @@ const ForgotPasswordForm = () => {
 
   const onFormSubmit = (e) => {
     e.preventDefault();
+
+    const requestBody = { email };
+    axios
+      .post(`${API_URL}/auth/password-reset-email`, requestBody)
+      .then((response) => {
+        console.log(response.data);
+        toast.success(response.data.message, {
+          position: toast.POSITION.TOP_RIGHT
+        });
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message, {
+          position: toast.POSITION.TOP_RIGHT
+        });
+      });
+
+    setEmail("");
   };
 
   const checkFields = () => {
@@ -37,7 +56,7 @@ const ForgotPasswordForm = () => {
           name="email"
           label="Email"
           placeholder="Email"
-          type="email"
+          type="text"
           value={email}
           onChange={handleEmailChange}
         />
