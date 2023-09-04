@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Button, Form, Message } from "semantic-ui-react";
 import axios from "axios";
+import { AuthContext } from "../context/auth.context";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const API_URL = "http://localhost:5005";
 const ForgotPasswordForm = () => {
+  const { user } = useContext(AuthContext);
   const [email, setEmail] = useState("");
 
   const handleEmailChange = (e) => {
@@ -19,7 +21,6 @@ const ForgotPasswordForm = () => {
     axios
       .post(`${API_URL}/auth/password-reset-email`, requestBody)
       .then((response) => {
-        console.log(response.data);
         toast.success(response.data.message, {
           position: toast.POSITION.TOP_RIGHT
         });

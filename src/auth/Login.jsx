@@ -64,7 +64,6 @@ const Login = () => {
         onSubmit={onFormSubmit}
         className="attached left aligned fluid segment"
       >
-        <Form.Group widths="equal"></Form.Group>
         <Form.Input
           name="email"
           label="Email"

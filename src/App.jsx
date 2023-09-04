@@ -16,6 +16,7 @@ import { Grid, Image } from "semantic-ui-react";
 import axios from "axios";
 import VerifyEmail from "./components/VerifyEmail";
 import ForgotPasswordForm from "./auth/ForgotPasswordForm";
+import PasswordResetForm from "./auth/PasswordResetForm";
 
 const API_URL = "http://localhost:5005";
 
@@ -224,6 +225,7 @@ function App() {
             element={<VerifyEmailNotification />}
           />
           <Route path="/forgot-password" element={<ForgotPasswordForm />} />
+          <Route path="/password-reset" element={<PasswordResetForm />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
