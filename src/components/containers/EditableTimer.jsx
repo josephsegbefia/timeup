@@ -1,6 +1,6 @@
 import React from "react";
-import TimerForm from "./TimerForm";
-import Timer from "./Timer";
+import TimerForm from "../pages/TimerForm";
+import Timer from "../pages/Timer";
 
 class EditableTimer extends React.Component {
   state = {

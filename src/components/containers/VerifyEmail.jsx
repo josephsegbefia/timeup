@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/auth.context";
+import { AuthContext } from "../../context/auth.context";
 import { Message } from "semantic-ui-react";
 import axios from "axios";
 

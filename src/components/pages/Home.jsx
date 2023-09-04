@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Message, Button, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../context/auth.context";
+import { AuthContext } from "../../context/auth.context";
 
 const Home = () => {
   const { isLoggedIn } = useContext(AuthContext);

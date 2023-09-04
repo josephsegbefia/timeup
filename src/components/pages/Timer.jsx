@@ -1,6 +1,6 @@
 import React from "react";
 import TimerActionButton from "./TimerActionButton";
-import { renderElapsedString } from "../helpers";
+import { renderElapsedString } from "../../helpers";
 
 class Timer extends React.Component {
   componentDidMount() {

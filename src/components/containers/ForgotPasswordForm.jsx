@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Button, Form, Message } from "semantic-ui-react";
 import axios from "axios";
-import { AuthContext } from "../context/auth.context";
+import { AuthContext } from "../../context/auth.context";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

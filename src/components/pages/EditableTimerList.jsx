@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import EditableTimer from "./EditableTimer";
+import EditableTimer from "../containers/EditableTimer";
 import ToggleableTimerForm from "./ToggleableTimerForm";
 import { Grid } from "semantic-ui-react";
 

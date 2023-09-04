@@ -1,22 +1,22 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Routes, Route, useParams, useNavigate } from "react-router-dom";
 import { newTimer, generateUniqueId } from "./helpers";
-import EditableTimerList from "./components/EditableTimerList";
-import ToggleableTimerForm from "./components/ToggleableTimerForm";
+import EditableTimerList from "./components/pages/EditableTimerList";
+import ToggleableTimerForm from "./components/pages/ToggleableTimerForm";
 import { getTimers } from "./client";
-import HeaderMenu from "./components/HeaderMenu";
-import Home from "./components/Home";
+import HeaderMenu from "./components/pages/HeaderMenu";
+import Home from "./components/pages/Home";
 import Login from "./auth/Login";
 import Signup from "./auth/Signup";
 import VerifyEmailNotification from "./components/pages/VerifyEmailNotification";
-import IsPrivate from "./components/IsPrivate";
+import IsPrivate from "./components/pages/IsPrivate";
 import { AuthContext } from "./context/auth.context";
 import { Grid, Image } from "semantic-ui-react";
 
 import axios from "axios";
-import VerifyEmail from "./components/VerifyEmail";
-import ForgotPasswordForm from "./auth/ForgotPasswordForm";
-import PasswordResetForm from "./auth/PasswordResetForm";
+import VerifyEmail from "./components/containers/VerifyEmail";
+import ForgotPasswordForm from "./components/containers/ForgotPasswordForm";
+import PasswordResetForm from "./components/containers/PasswordResetForm";
 
 const API_URL = "https://timeapp-w9z5.onrender.com";
 

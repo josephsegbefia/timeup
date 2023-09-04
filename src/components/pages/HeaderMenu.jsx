@@ -2,7 +2,7 @@ import React from "react";
 import { Input, Menu, Image } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 import { useState, useContext } from "react";
-import { AuthContext } from "../context/auth.context";
+import { AuthContext } from "../../context/auth.context";
 
 function HeaderMenu() {
   const [activeItem, setActiveItem] = useState("");
