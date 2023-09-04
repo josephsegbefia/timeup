@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://timeapp-w9z5.onrender.com";
 
 const Login = () => {
   const [email, setEmail] = useState("");

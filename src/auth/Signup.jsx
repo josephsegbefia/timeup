@@ -6,7 +6,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://timeapp-w9z5.onrender.com";
 
 const Signup = () => {
   const [firstName, setFirstName] = useState("");

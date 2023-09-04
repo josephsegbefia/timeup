@@ -5,7 +5,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://timeapp-w9z5.onrender.com";
 const PasswordResetForm = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");

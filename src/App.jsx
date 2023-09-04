@@ -18,7 +18,7 @@ import VerifyEmail from "./components/VerifyEmail";
 import ForgotPasswordForm from "./auth/ForgotPasswordForm";
 import PasswordResetForm from "./auth/PasswordResetForm";
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://timeapp-w9z5.onrender.com";
 
 function App() {
   const [timers, setTimers] = useState([]);

@@ -4,7 +4,7 @@ import { AuthContext } from "../context/auth.context";
 import { Message } from "semantic-ui-react";
 import axios from "axios";
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://timeapp-w9z5.onrender.com";
 
 const VerifyEmail = () => {
   const { user, updateUser } = useContext(AuthContext);

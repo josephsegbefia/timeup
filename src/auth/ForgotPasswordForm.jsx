@@ -5,7 +5,7 @@ import { AuthContext } from "../context/auth.context";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://timeapp-w9z5.onrender.com";
 const ForgotPasswordForm = () => {
   const { user } = useContext(AuthContext);
   const [email, setEmail] = useState("");
