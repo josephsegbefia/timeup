@@ -3,6 +3,7 @@ import { Button, Form, Icon, Message } from "semantic-ui-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { Loader, Dimmer } from "semantic-ui-react";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
@@ -14,7 +15,7 @@ const Signup = () => {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  // const [submitdisabled, setSubmitDisabled] = useState(true);
+  const [signingUp, setSigningUp] = useState(false);
 
   const navigate = useNavigate();
 
@@ -54,6 +55,7 @@ const Signup = () => {
 
   const onFormSubmit = (e) => {
     e.preventDefault();
+    setSigningUp(true);
 
     const requestBody = { firstName, lastName, email, password };
 
@@ -78,6 +80,15 @@ const Signup = () => {
         });
       });
   };
+  if (signingUp) {
+    return (
+      <div>
+        <Dimmer active inverted>
+          <Loader inverted>Creating Account. Please Wait...</Loader>;
+        </Dimmer>
+      </div>
+    );
+  }
 
   return (
     <div>

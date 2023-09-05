@@ -6,12 +6,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
+import { Loader, Dimmer } from "semantic-ui-react";
 
 const API_URL = "https://timeapp-w9z5.onrender.com";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loggingIn, setLoggingIn] = useState(false);
 
   const navigate = useNavigate();
 
@@ -32,18 +34,16 @@ const Login = () => {
   };
   const onFormSubmit = (e) => {
     e.preventDefault();
+    setLoggingIn(true);
 
     const requestBody = { email, password };
 
     axios
       .post(`${API_URL}/auth/login`, requestBody)
       .then((response) => {
-        console.log(response.data);
-        toast.success("Login Successful", {
-          position: toast.POSITION.TOP_RIGHT
-        });
         storeToken(response.data.authToken);
         authenticateUser();
+        setLoggingIn(false);
         navigate("/");
       })
       .catch((err) => {
@@ -52,6 +52,15 @@ const Login = () => {
         });
       });
   };
+  if (loggingIn) {
+    return (
+      <div>
+        <Dimmer active inverted>
+          <Loader inverted>Logging In. Please Wait...</Loader>;
+        </Dimmer>
+      </div>
+    );
+  }
   return (
     <div>
       <Message
