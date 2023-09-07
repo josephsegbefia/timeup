@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form, Icon, Message } from "semantic-ui-react";
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { Loader, Dimmer } from "semantic-ui-react";
 import "react-toastify/dist/ReactToastify.css";
@@ -39,27 +38,15 @@ const Signup = () => {
     setPasswordConfirm(e.target.value);
   };
 
-  const checkPass = () => {
-    const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
-    if (!passwordRegex.test(password)) {
-      return toast.error("Password does not meet the requirements");
-    }
-    return;
-  };
-
   const checkFields = () => {
-    if (
+    return (
       !firstName ||
       !lastName ||
       !email ||
       !password ||
       !passwordConfirm ||
       password !== passwordConfirm
-    ) {
-      return true;
-    }
-
-    return false;
+    );
   };
 
   const onFormSubmit = (e) => {
@@ -67,14 +54,19 @@ const Signup = () => {
 
     setSigningUp(true);
 
+    const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+
+    if (!passwordRegex.test(password)) {
+      toast.error("Password does not meet the requirements");
+      setSigningUp(false);
+      return;
+    }
+
     const requestBody = { firstName, lastName, email, password };
 
     axios
       .post(`${API_URL}/auth/signup`, requestBody)
       .then((response) => {
-        // console.log(response.data.user);
-        // console.log(response.data);
-
         toast.success("Sign up successful. Redirecting to log in page", {
           position: toast.POSITION.TOP_RIGHT
         });
@@ -84,13 +76,13 @@ const Signup = () => {
         }, 2000);
       })
       .catch((err) => {
-        // console.log(err.response.data.message);
         setSigningUp(false);
         toast.error(err.response.data.message, {
           position: toast.POSITION.TOP_RIGHT
         });
       });
   };
+
   if (signingUp) {
     return (
       <div>
@@ -154,7 +146,7 @@ const Signup = () => {
           <ul>
             <li>At least 6 characters</li>
             <li>At least one number</li>
-            <li>One lowercase </li>
+            <li>One lowercase</li>
             <li>One uppercase letter</li>
           </ul>
         </small>
@@ -166,7 +158,6 @@ const Signup = () => {
           placeholder="Make sure passwords match to activate submit button"
           onChange={handlePasswordConfirmChange}
         />
-        {/* <Form.Checkbox inline label="I agree to the terms and conditions" /> */}
         <Button type="submit" color="blue" disabled={checkFields()}>
           Submit
         </Button>
