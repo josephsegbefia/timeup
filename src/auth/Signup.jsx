@@ -58,13 +58,7 @@ const Signup = () => {
     ) {
       return true;
     }
-    const checkPass = () => {
-      const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
-      if (!passwordRegex.test(password)) {
-        toast.error("Password does not meet the requirements");
-      }
-      return false;
-    };
+
     return false;
   };
 
@@ -90,7 +84,8 @@ const Signup = () => {
         }, 2000);
       })
       .catch((err) => {
-        console.log(err.response.data.message);
+        // console.log(err.response.data.message);
+        setSigningUp(false);
         toast.error(err.response.data.message, {
           position: toast.POSITION.TOP_RIGHT
         });
@@ -100,7 +95,7 @@ const Signup = () => {
     return (
       <div>
         <Dimmer active inverted>
-          <Loader inverted>Creating Account. Please Wait...</Loader>;
+          <Loader inverted>Creating Account. Please Wait...</Loader>
         </Dimmer>
       </div>
     );

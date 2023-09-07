@@ -47,6 +47,7 @@ const Login = () => {
         navigate("/");
       })
       .catch((err) => {
+        setLoggingIn(false);
         toast.error(err.response.data.message, {
           position: toast.POSITION.TOP_RIGHT
         });
