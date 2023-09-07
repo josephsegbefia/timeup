@@ -39,6 +39,14 @@ const Signup = () => {
     setPasswordConfirm(e.target.value);
   };
 
+  const checkPass = () => {
+    const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+    if (!passwordRegex.test(password)) {
+      return toast.error("Password does not meet the requirements");
+    }
+    return;
+  };
+
   const checkFields = () => {
     if (
       !firstName ||
@@ -50,11 +58,19 @@ const Signup = () => {
     ) {
       return true;
     }
+    const checkPass = () => {
+      const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+      if (!passwordRegex.test(password)) {
+        toast.error("Password does not meet the requirements");
+      }
+      return false;
+    };
     return false;
   };
 
   const onFormSubmit = (e) => {
     e.preventDefault();
+
     setSigningUp(true);
 
     const requestBody = { firstName, lastName, email, password };
@@ -130,6 +146,7 @@ const Signup = () => {
           value={email}
           onChange={handleEmailChange}
         />
+
         <Form.Input
           name="password"
           label="Password"
@@ -137,6 +154,15 @@ const Signup = () => {
           value={password}
           onChange={handlePasswordChange}
         />
+        <small>
+          Password must have:
+          <ul>
+            <li>At least 6 characters</li>
+            <li>At least one number</li>
+            <li>One lowercase </li>
+            <li>One uppercase letter</li>
+          </ul>
+        </small>
         <Form.Input
           name="passwordConfirm"
           label="Confirm Password"
