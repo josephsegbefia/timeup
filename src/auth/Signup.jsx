@@ -81,6 +81,11 @@ const Signup = () => {
           position: toast.POSITION.TOP_RIGHT
         });
       });
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPassword("");
+    setPasswordConfirm("");
   };
 
   if (signingUp) {

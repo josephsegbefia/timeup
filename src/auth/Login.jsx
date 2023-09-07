@@ -52,6 +52,9 @@ const Login = () => {
           position: toast.POSITION.TOP_RIGHT
         });
       });
+
+    setEmail("");
+    setPassword("");
   };
   if (loggingIn) {
     return (
