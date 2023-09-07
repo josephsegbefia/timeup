@@ -31,7 +31,7 @@ function App() {
   let user_id;
   if (user) {
     user_id = user._id;
-    console.log("What I want to see:", user_id);
+    // console.log("What I want to see:", user_id);
   }
 
   const navigate = useNavigate();
@@ -47,10 +47,10 @@ function App() {
         headers: { Authorization: `Bearer ${storedToken}` }
       })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
 
     // setTimers([...timers, t]);
@@ -61,19 +61,19 @@ function App() {
         headers: { Authorization: `Bearer ${storedToken}` }
       })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setTimers(response.data);
         // setRerender(!rerender);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
     setRerender(!rerender);
   };
 
   const updateTimer = (attrs) => {
     let timerId = attrs.id;
-    console.log("TimerId", timerId);
+    // console.log("TimerId", timerId);
     setTimers((prevTimers) =>
       prevTimers.map((timer) =>
         timer._id === attrs.id
@@ -89,10 +89,10 @@ function App() {
         { headers: { Authorization: `Bearer ${storedToken}` } }
       )
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 
@@ -105,7 +105,7 @@ function App() {
       })
       .then((response) => {
         // Handle success, e.g., remove the deleted timer from the UI
-        console.log("Timer deleted successfully", response.data);
+        // console.log("Timer deleted successfully", response.data);
         // You may want to update your component state or UI here
         // Example: remove the deleted timer from a list of timers
         const updatedTimers = timers.filter((timer) => timer._id !== timerId);
@@ -133,10 +133,10 @@ function App() {
         { headers: { Authorization: `Bearer ${storedToken}` } }
       )
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 
@@ -163,16 +163,16 @@ function App() {
         { headers: { Authorization: `Bearer ${storedToken}` } }
       )
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 
   if (user) {
     userId = user._id;
-    console.log(userId);
+    // console.log(userId);
   }
   const getAllTimers = () => {
     if (user) {
@@ -181,11 +181,11 @@ function App() {
           headers: { Authorization: `Bearer ${storedToken}` }
         })
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           setTimers(response.data);
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
           navigate("/");
         });
     }
@@ -229,15 +229,6 @@ function App() {
           <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          {/* <Route
-            path="/timers"
-            element={
-              <ToggleableTimerForm
-                // isOpen={true}
-                onFormSubmit={handleCreateFormSubmit}
-              />
-            }
-          /> */}
         </Routes>
       </div>
     </div>
